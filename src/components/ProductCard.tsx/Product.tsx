@@ -14,9 +14,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { products } from "../data/products.json";
-import { products1 } from "../data/products1.json";
-import { products2 } from "../data/products2.json";
+import  prods from "../data/products.json";
 import { Box, Container } from "@mui/material";
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -44,7 +42,7 @@ export default function Products() {
   return (
     <>
       <Box>
-        {products.map((item, index) => (
+        {prods.products.map((item, index) => (
           <Container key={index} style={{ display: "flex", overflowY: "auto" }}>
             <Card sx={{ maxWidth: 345, margin: "10px" }} key={item.title}>
               <CardHeader
