@@ -19,6 +19,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import MainNavigationTabs from "@/components/navigation/MainNavigation";
 import PersistentDrawerLeft from "@/components/navigation/Drawer";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useRouter } from "next/navigation";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,7 +69,7 @@ export default function RootLayout({
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-
+const router = useRouter()
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -93,8 +94,13 @@ export default function RootLayout({
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    router.push('/login')
   };
-
+  const handleMenuSettings = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    router.push('/settings')
+  };
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -118,7 +124,7 @@ export default function RootLayout({
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
+      <MenuItem onClick={handleMenuSettings}>Settings</MenuItem>
       <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
     </Menu>
   );

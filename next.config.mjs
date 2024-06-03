@@ -8,7 +8,7 @@
         return [
           {
             source: '/api/:path*',
-            destination: 'http://51.20.136.111:8000/api/:path*'
+            destination: 'http://13.48.249.192:8000//api/:path*'
           }
         ];
       },

@@ -58,6 +58,9 @@ export default function Products() {
                 height="194"
                 image={item.img}
                 alt={item.title}
+                sx={{
+                  width: 500,
+                }}
               />
 
               <CardContent>

@@ -5,10 +5,11 @@ import {
   useSelector,
   type TypedUseSelectorHook
 } from 'react-redux';
+import UsersReducer from '@/components/slices/usersSlice'
 
 export const store = configureStore({
   reducer: {
-    
+    userSlice: UsersReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

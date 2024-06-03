@@ -8,15 +8,22 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signIn, useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import { store } from "@/components/redux/store";
+import { fetchClientUsers } from "@/components/slices/usersSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [pswdError, setPswdError] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState('');
+  const router = useRouter();
+  const [users,setUsers] = useState<any>([])
+  const [data,setData] = useState<any>([])
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setEmail(value);
@@ -45,20 +52,50 @@ const Login = () => {
       keepDirtyValues: true, // keep dirty fields unchanged, but update defaultValues
     },
   });
-  const onSubmit: SubmitHandler<any> = (data) => console.log(data);
-  const handleLogin = (e: { preventDefault: () => void }) => {
-    signIn(
-      "qpt",
-      {
-        callbackUrl: process.env.NEXT_PUBLIC_BASE_PATH
-          ? `/${process.env.NEXT_PUBLIC_BASE_PATH}/home`
-          : `/home`,
-      },
-      {
-        login_hint: email,
+console.log(password,email)
+  const fetchusers = ()=>{
+    try {
+        store.dispatch(fetchClientUsers()).then((res: any)=>{
+            console.log(res,'res')
+            setData(res.payload.data)
+        })
+    } catch (error) {
+        
+    }
+  }
+  useEffect(()=>{
+    fetchusers();
+  },[])
+  const onSubmit = (e: any) => {
+    if (!email || !password) {
+      setError('Email and Password are required.');
+      return;
+    }``
+    store.dispatch(fetchClientUsers()).then((res) => {
+      setUsers(res?.payload.data)
+    })
+    const user = data.find((user: any) => user.email === email && user.password === password);
+    console.log(data)
+    if (user) {
+      setError('');
+      sessionStorage.setItem('user', JSON.stringify(user));
+      // Set session timeout for 30 minutes
+      setTimeout(() => {
+        sessionStorage.removeItem('user');
+        alert('Session expired. Please login again.');
+        router.push('/login');
+      }, 30 * 60 * 1000); // 30 minutes
+      // Navigate based on userType
+      if (user?.userType === 'client') {
+        router.push('/home');
+      } else {
+        router.push('/settings');
       }
-    );
+    } else {
+      setError('Invalid email or password.');
+    }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box
@@ -86,6 +123,7 @@ const Login = () => {
               name="email"
               autoComplete="email"
               value={email}
+              autoFocus
               onChange={handleEmailChange}
               error={Boolean(emailError)}
               helperText={emailError}
@@ -96,7 +134,6 @@ const Login = () => {
               id="password"
               label="Password"
               name="password"
-              autoFocus
               value={password}
               onChange={handlePwdChange}
               error={Boolean(emailError)}
@@ -105,8 +142,8 @@ const Login = () => {
             <Button
               type="submit"
               variant="contained"
-              onClick={handleLogin}
-              disabled={Boolean(emailError) || email.length === 0}
+              // onClick={handleLogin}
+              disabled={!password || !email}
               sx={{ mt: 3, mb: 3 }}
             >
               Sign In
@@ -122,5 +159,5 @@ const Login = () => {
     </form>
   );
 };
-
 export default Login;
+
