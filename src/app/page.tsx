@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const Home = () => {
   const router = useRouter();
   return (
-    <main style={{ background: "black", minHeight: "100vh" }}>
+    <main style={{ background: "#8f8f87", minHeight: "100vh" }}>
       <Container maxWidth="lg">
       <Grid
           container
@@ -75,15 +75,6 @@ const Home = () => {
           height={100}
         >
           <Link href="">
-            <Image
-              src={`/vercel.svg`}
-              alt="RAPIDx Logo"
-              width={100}
-              height={30}
-              style={{
-                height: "auto",
-              }}
-            />
           </Link>
           <Stack direction="row">
             <Button
