@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ReduxProvider>
-        <body className={inter.className}>{children}</body>
-      </ReduxProvider>
+        <ReduxProvider>
+          <body className={inter.className}>{children}</body>
+        </ReduxProvider>
     </html>
   );
 }

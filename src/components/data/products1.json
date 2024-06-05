@@ -4,73 +4,85 @@
     "img": "https://cdn01.pharmeasy.in/dam/products/045650/cof-q-tablet-1-1662018997.jpg",
     "title": "Cough Q",
     "author": "@bkristastucchio",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://5.imimg.com/data5/SELLER/Default/2022/11/UQ/OF/SR/150545583/17-500x500.jpg",
     "title": "Togio 300mg",
     "author": "@rollelflex_graphy726",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
-    "img": "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    "title": "Camera",
+    "img": "https://5.imimg.com/data5/SELLER/Default/2022/9/QD/FL/LL/158132458/bosutinib-500x500.jpg",
+    "title": "Bosutinib",
     "author": "@helloimnik",
-    "description":"Paracetamol is a medicine used to treat mild to moderate pain. Paracetamol can also be used to treat fever (high temperature). It's dangerous to take more than the recommended dose of paracetamol. Paracetamol overdose can damage your liver and cause death."
+    "description":"Paracetamol is a medicine used to treat mild to moderate pain. Paracetamol can also be used to treat fever (high temperature). It's dangerous to take more than the recommended dose of paracetamol. Paracetamol overdose can damage your liver and cause death.",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
     "title": "Coffee",
     "author": "@nolanissac",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
     "title": "Hats",
     "author": "@hjrc33",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
     "title": "Honey",
     "author": "@arwinneil",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
     "title": "Basketball",
     "author": "@tjdragotta",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
     "title": "Fern",
     "author": "@katie_wasserman",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
     "title": "Mushrooms",
     "author": "@silverdalex",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
     "title": "Tomato basil",
     "author": "@shelleypauls",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
     "title": "Sea star",
     "author": "@peterlaster",
-    "description":""
+    "description":"",
+    "mrp":"330"
   },
   {
     "img": "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
     "title": "Bike",
     "author": "@southside_customs",
-    "description":""
+    "description":"",
+    "mrp":"330"
   }
 ]
 }

@@ -4,73 +4,85 @@
     "img": "https://5.imimg.com/data5/SELLER/Default/2022/2/OV/ML/PK/138082217/paracetamol-500-mg-tab.png",
     "title": "Paracetamol",
     "author": "@bkristastucchio",
-    "description":""
+    "description":"A commonly used medicine that can help treat pain and reduce a high temperature (fever)",
+    "mrp":"120"
   },
   {
-    "img": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    "title": "Burger",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSplNfQyydnG8cawM4ui-CSnLWPPpTE0fK03g&s",
+    "title": "Migrahils",
     "author": "@rollelflex_graphy726",
-    "description":""
+    "description":"This Medicine used to cure headches and body pains",
+    "mrp":"1230"
   },
   {
-    "img": "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    "title": "Camera",
+    "img": "https://5.imimg.com/data5/OS/XP/QZ/SELLER-5742893/cancer-medicine-500x500.jpg",
+    "title": "Sofab LP",
     "author": "@helloimnik",
-    "description":"Paracetamol is a medicine used to treat mild to moderate pain. Paracetamol can also be used to treat fever (high temperature). It's dangerous to take more than the recommended dose of paracetamol. Paracetamol overdose can damage your liver and cause death."
+    "description":"Migin is a medicine used to treat mild to moderate pain. Paracetamol can also be used to treat fever (high temperature)",
+    "mrp":"120"
   },
   {
-    "img": "https://m.media-amazon.com/images/I/71HR4mBnubL._AC_UF1000,1000_QL80_.jpg",
-    "title": "Pulmo Surge",
+    "img": "https://m.media-amazon.com/images/I/71h73PWKXuL.jpg",
+    "title": "Mygraine",
     "author": "@nolanissac",
-    "description":""
+    "description":"",
+    "mrp":"1332"
   },
   {
-    "img": "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    "title": "Hats",
+    "img": "https://www.neuraclelife.com/wp-content/uploads/2022/02/FLUNZI.jpg",
+    "title": "Flunzi",
     "author": "@hjrc33",
-    "description":""
+    "description":"",
+    "mrp":"120"
   },
   {
-    "img": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    "title": "Honey",
+    "img": "https://www.somacare.co.in/wp-content/uploads/2022/03/Amitril-10.jpg",
+    "title": "Amitril-10",
     "author": "@arwinneil",
-    "description":""
+    "description":"",
+    "mrp":"110"
   },
   {
-    "img": "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    "title": "Basketball",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGFNnuTKWHN6H_VjDH4XyhtzNLEgtrj9-0WA&s",
+    "title": "Migrahills",
     "author": "@tjdragotta",
-    "description":""
+    "description":"",
+    "mrp":"1340"
   },
   {
-    "img": "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    "title": "Fern",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_V6yWSNDXLSLpYMLXPu83Fz5seI7g2uzG-w&s",
+    "title": "Sumatriptan",
     "author": "@katie_wasserman",
-    "description":""
+    "description":"",
+    "mrp":"820"
   },
   {
-    "img": "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    "title": "Mushrooms",
+    "img": "https://lloydspharmacy.com/cdn/shop/products/sud_3…ain_uk_24ct_009_430x.progressive.jpg?v=1642520763",
+    "title": "Sudafed-300mg",
     "author": "@silverdalex",
-    "description":""
+    "description":"",
+    "mrp":"520"
   },
   {
     "img": "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
     "title": "Tomato basil",
     "author": "@shelleypauls",
-    "description":""
+    "description":"",
+    "mrp":"120"
   },
   {
     "img": "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
     "title": "Sea star",
     "author": "@peterlaster",
-    "description":""
+    "description":"",
+    "mrp":"120"
   },
   {
     "img": "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
     "title": "Bike",
     "author": "@southside_customs",
-    "description":""
+    "description":"",
+    "mrp":"120"
   }
 ]
 }

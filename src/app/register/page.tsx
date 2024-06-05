@@ -10,41 +10,58 @@ import {
 } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { signIn, useSession } from "next-auth/react";
+import { store } from "@/components/redux/store";
+import { addClientUser } from "@/components/slices/usersSlice";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
+  const router = useRouter();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [age, setAge] = useState();
+  const [address, setAddress] = useState<string>("");
+  const [phoneNo, setPhoneNo] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [emailError, setEmailError] = useState("");
-  const [password, setPassword] = useState("");
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setEmail(value);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      setEmailError("Please enter a valid email address");
-    } else {
-      setEmailError("");
-    }
-  };
+  const [phoneErr, setPhoneError] = useState<string>("");
   const { handleSubmit, control } = useForm<any>({
     resetOptions: {
       keepDirtyValues: true, // keep dirty fields unchanged, but update defaultValues
     },
   });
-  const onSubmit: SubmitHandler<any> = (data) => console.log(data);
-  const handleRegister = (e: { preventDefault: () => void }) => {
-    signIn(
-      "qpt",
-      {
-        callbackUrl: process.env.NEXT_PUBLIC_BASE_PATH
-          ? `/${process.env.NEXT_PUBLIC_BASE_PATH}/home`
-          : `/home`,
-      },
-      {
-        Register_hint: email,
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const pattern = new RegExp(/^\d{1,10}$/);
+
+  const handledRegister = async () => {
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
+    } else if (!pattern.test(phoneNo)) {
+      setPhoneError("Please enter valid Phone Number");
+    } else {
+      setEmailError("");
+      try {
+        const id = Math.floor(Math.random() * 90 + 10);
+        let data = {
+          id: id,
+          name: name,
+          age: age,
+          email: email,
+          addr: address,
+          phno: phoneNo,
+          psw: password,
+        };
+        await store.dispatch(addClientUser(data)).then((res: any) => {
+        });
+        await router.push("/login");
+      } catch (error) {
+        console.log(error,'error at register')
       }
-    );
+    }
   };
+  const onSubmit: SubmitHandler<any> = (data) => {
+    // console.log(data);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box
@@ -58,7 +75,7 @@ const Register = () => {
         <Container
           sx={{
             border: "1px solid #CCCCCC",
-            width: "30%",
+            width: 420,
             padding: "40px",
             borderRadius: "10px",
           }}
@@ -67,80 +84,78 @@ const Register = () => {
           <Box sx={{ mt: 3, display: "grid", width: 360 }}>
             <TextField
               required
-              id="email"
-              label="First Name"
-              name="email"
-              autoComplete="email"
-              value={email}
-              onChange={handleEmailChange}
-              error={Boolean(emailError)}
-              helperText={emailError}
-              sx={{margin:'10px'}}
-            />
-            <TextField
-              required
-              id="password"
-              label="Last Name"
-              name="password"
-              value={password}
-              onChange={handleEmailChange}
-              error={Boolean(emailError)}
-              helperText={emailError}
-              sx={{margin:'10px'}}
+              id="full name"
+              label="Full Name"
+              autoComplete="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              sx={{ margin: "10px" }}
             />
             <TextField
               required
               id="email"
               label="Email"
               name="email"
-              value={password}
-              onChange={handleEmailChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               error={Boolean(emailError)}
               helperText={emailError}
-              sx={{margin:'10px'}}
+              sx={{ margin: "10px" }}
             />
             <TextField
               required
               id="password"
+              label="Password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{ margin: "10px" }}
+            />
+            <TextField
+              required
+              id="phone number"
               label="Phone Number"
-              name="password"
-              value={password}
-              onChange={handleEmailChange}
-              error={Boolean(emailError)}
-              helperText={emailError}
-              sx={{margin:'10px'}}
+              name="phone number"
+              type="number"
+              value={phoneNo}
+              onChange={(e: any) => setPhoneNo(e.target.value)}
+              sx={{ margin: "10px" }}
             />
             <TextField
               required
-              id="password"
+              id="age"
+              label="Age"
+              name="age"
+              type="number"
+              value={age}
+              onChange={(e: any) => setAge(e.target.value)}
+              sx={{ margin: "10px" }}
+            />
+            <TextField
+              required
+              id="addres"
               label="Address"
-              name="password"
-              value={password}
-              onChange={handleEmailChange}
-              error={Boolean(emailError)}
-              helperText={emailError}
-              sx={{margin:'10px'}}
-            />
-            <TextField
-              required
-              id="password"
-              label="Pincode"
-              name="password"
-              value={password}
-              onChange={handleEmailChange}
-              error={Boolean(emailError)}
-              helperText={emailError}
-              sx={{margin:'10px'}}
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              sx={{ margin: "10px" }}
             />
             <Button
-              type="submit"
               variant="contained"
-              onClick={handleRegister}
-              disabled={Boolean(emailError) || email.length === 0}
+              disabled={
+                !name || !email || !password || !age || !phoneNo || !address
+              }
               sx={{ mt: 3, mb: 3 }}
+              onClick={handledRegister}
             >
               Register
             </Button>
+            <Grid justifyContent="center">
+              <Link href="/login" style={{ fontSize: 13 }}>
+                {"Already have an account? Sign In"}
+              </Link>
+            </Grid>
           </Box>
         </Container>
       </Box>

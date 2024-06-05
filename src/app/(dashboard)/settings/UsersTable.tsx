@@ -55,7 +55,6 @@ const useCostCentersTable = () => {
     }
   };
   const handleUpdateCostCenters = (data: any) => {
-    console.log(data, "daataa");
     try {
       store.dispatch(updateClientUser(data));
       setReFetech((p) => !p);

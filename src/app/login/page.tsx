@@ -8,10 +8,10 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { store } from "@/components/redux/store";
 import { fetchClientUsers } from "@/components/slices/usersSlice";
 
@@ -20,10 +20,10 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [pswdError, setPswdError] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const router = useRouter();
-  const [users,setUsers] = useState<any>([])
-  const [data,setData] = useState<any>([])
+  const [data, setData] = useState<any>([]);;
+
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setEmail(value);
@@ -37,6 +37,8 @@ const Login = () => {
     } else {
       setEmailError("");
     }
+    setEmailError("");
+    setError('')
   };
   const handlePwdChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -52,47 +54,36 @@ const Login = () => {
       keepDirtyValues: true, // keep dirty fields unchanged, but update defaultValues
     },
   });
-console.log(password,email)
-  const fetchusers = ()=>{
+  const fetchusers = () => {
     try {
-        store.dispatch(fetchClientUsers()).then((res: any)=>{
-            console.log(res,'res')
-            setData(res.payload.data)
-        })
-    } catch (error) {
-        
-    }
-  }
-  useEffect(()=>{
+      store.dispatch(fetchClientUsers()).then((res: any) => {
+        setData(res.payload.data);
+      });
+    } catch (error) {}
+  };
+  useEffect(() => {
     fetchusers();
-  },[])
+  }, []);
   const onSubmit = (e: any) => {
-    if (!email || !password) {
-      setError('Email and Password are required.');
-      return;
-    }``
-    store.dispatch(fetchClientUsers()).then((res) => {
-      setUsers(res?.payload.data)
-    })
-    const user = data.find((user: any) => user.email === email && user.password === password);
-    console.log(data)
+    const user = data.find(
+      (user: any) => user.email === email && user.password === password
+    );
     if (user) {
-      setError('');
-      sessionStorage.setItem('user', JSON.stringify(user));
-      // Set session timeout for 30 minutes
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("password", user.password);
       setTimeout(() => {
-        sessionStorage.removeItem('user');
-        alert('Session expired. Please login again.');
-        router.push('/login');
-      }, 30 * 60 * 1000); // 30 minutes
-      // Navigate based on userType
-      if (user?.userType === 'client') {
-        router.push('/home');
+        sessionStorage.removeItem("email");
+        sessionStorage.removeItem("password");
+        alert("Session expired. Please login again.");
+        router.push("/login");
+      }, 30 * 60 * 1000);
+      if (user?.userType === "client") {
+        router.push("/home");
       } else {
-        router.push('/settings');
+        router.push("/settings");
       }
     } else {
-      setError('Invalid email or password.');
+      setError("Invalid email or password.");
     }
   };
 
@@ -102,7 +93,7 @@ console.log(password,email)
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Container
@@ -111,10 +102,9 @@ console.log(password,email)
             width: "30%",
             padding: "40px",
             borderRadius: "10px",
-            
           }}
         >
-          <Typography variant="h5">Signin Quantum Pharma Tech</Typography>
+          <Typography variant="h5">Log In to Quantum Pharma Tech</Typography>
           <Box sx={{ mt: 3, display: "grid" }}>
             <TextField
               required
@@ -127,6 +117,7 @@ console.log(password,email)
               onChange={handleEmailChange}
               error={Boolean(emailError)}
               helperText={emailError}
+              type='email'
             />
             <TextField
               margin="normal"
@@ -136,18 +127,17 @@ console.log(password,email)
               name="password"
               value={password}
               onChange={handlePwdChange}
-              error={Boolean(emailError)}
-              helperText={emailError}
+              type='password'
             />
             <Button
               type="submit"
               variant="contained"
-              // onClick={handleLogin}
               disabled={!password || !email}
               sx={{ mt: 3, mb: 3 }}
             >
               Sign In
             </Button>
+            <span style={{ color: "red" }}>{error ? error : ""}</span>
             <Grid justifyContent="center">
               <Link href="/register" style={{ fontSize: 13 }}>
                 {"Don't have an account? Sign Up"}
@@ -160,4 +150,3 @@ console.log(password,email)
   );
 };
 export default Login;
-

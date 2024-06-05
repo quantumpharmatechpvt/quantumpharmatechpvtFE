@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -8,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Home = () => {
   const router = useRouter();
   return (
-    <main style={{ background: "#8f8f87", minHeight: "100vh" }}>
+    <main style={{ background: "#AFEEEE", minHeight: "100vh" }}>
       <Container maxWidth="lg">
       <Grid
           container
@@ -92,7 +91,6 @@ const Home = () => {
             </Button>
           </Stack>
         </Stack>
-   
       </Container>
     </main>
   );

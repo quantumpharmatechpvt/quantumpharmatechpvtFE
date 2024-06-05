@@ -18,6 +18,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { useRouter } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -73,6 +74,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function PersistentDrawerLeft(props: any) {
   const theme = useTheme();
   const { open, handleDrawerClose  } = props;
+  const router = useRouter();
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -101,7 +103,11 @@ export default function PersistentDrawerLeft(props: any) {
         <Divider />
         <List>
           {["My Orders", "Buy Again", "Account", "Recommendations"].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem key={text} disablePadding onClick={(e)=>{
+              if(text == 'My Orders'){
+                router.push('/orders')
+              }
+            }}>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}

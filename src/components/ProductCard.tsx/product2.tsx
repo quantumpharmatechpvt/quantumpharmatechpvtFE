@@ -16,6 +16,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import prod from "../data/products2.json";
 import { Box, Container } from "@mui/material";
+import { setCartProducts2 } from "../slices/productsSlice";
+import { store } from "../redux/store";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -38,13 +40,20 @@ export default function Products() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  let prodArr: any = [];
+  const addCartItems = (e: any) => {
+    const addedProduct = prod.products2.find((item: any) => item.title === e);
+    if (addedProduct) {
+      prodArr = [...prodArr, addedProduct];
+    }
+    store.dispatch(setCartProducts2(prodArr));
+  };
   return (
     <>
       <Box>
         {prod.products2.map((item, index) => (
           <Container key={index} style={{ display: "flex", overflowY: "auto" }}>
-            <Card sx={{ maxWidth: 345, margin: "10px" }} key={item.title}>
+            <Card sx={{ maxWidth: 345, margin: "10px",maxHeight: 445 }} key={item.title}>
               <CardHeader
                 action={
                   <IconButton aria-label="settings">
@@ -68,13 +77,15 @@ export default function Products() {
                   {item.description}
                 </Typography>
               </CardContent>
-              <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+              <CardActions disableSpacing key={item.title}>
+                <IconButton
+                  aria-label="add to favorites"
+                  key={item.title}
+                  onClick={(e) => addCartItems(item.title)}
+                >
                   <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
+                <Typography>MRP : ₹ {item.mrp} </Typography>
                 <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}

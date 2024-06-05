@@ -14,8 +14,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import  prods from "../data/products.json";
+import prods from "../data/products.json";
 import { Box, Container } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { store } from "../redux/store";
+import { setCartProducts } from "../slices/productsSlice";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -38,14 +41,22 @@ export default function Products() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  let prodArr: any = [];
+  const addCartItems = (e: any) => {
+    const addedProduct = prods.products.find((item: any) => item.title === e);
+    if (addedProduct) {
+      prodArr= [...prodArr, addedProduct]
+    }
+    store.dispatch(setCartProducts(prodArr));
+  };
   return (
     <>
       <Box>
         {prods.products.map((item, index) => (
           <Container key={index} style={{ display: "flex", overflowY: "auto" }}>
-            <Card sx={{ maxWidth: 345, margin: "10px" }} key={item.title}>
+            <Card sx={{ maxWidth: 345, margin: "10px",maxHeight: 545 }} key={item.title}>
               <CardHeader
+                key={index}
                 action={
                   <IconButton aria-label="settings">
                     <MoreVertIcon />
@@ -62,19 +73,20 @@ export default function Products() {
                   width: 500,
                 }}
               />
-
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
                   {item.description}
                 </Typography>
               </CardContent>
-              <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+              <CardActions disableSpacing key={item.title}>
+                <IconButton
+                  key={item.title}
+                  aria-label="add to favorites"
+                  onClick={(e) => addCartItems(item.title)}
+                >
                   <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
+                <Typography>MRP :₹ {item.mrp} </Typography>
                 <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}

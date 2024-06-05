@@ -1,20 +1,22 @@
-'use client';
-import { configureStore } from '@reduxjs/toolkit';
+"use client";
+import { configureStore } from "@reduxjs/toolkit";
 import {
   useDispatch,
   useSelector,
-  type TypedUseSelectorHook
-} from 'react-redux';
-import UsersReducer from '@/components/slices/usersSlice'
+  type TypedUseSelectorHook,
+} from "react-redux";
+import UsersReducer from "@/components/slices/usersSlice";
+import cartProductsReducer from "@/components/slices/productsSlice";
 
 export const store = configureStore({
   reducer: {
-    userSlice: UsersReducer
+    userSlice: UsersReducer,
+    cartSlice: cartProductsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false
-    })
+      serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
