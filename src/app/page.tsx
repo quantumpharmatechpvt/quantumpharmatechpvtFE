@@ -7,23 +7,23 @@ import { useRouter } from "next/navigation";
 const Home = () => {
   const router = useRouter();
   return (
-    <main style={{ background: "#AFEEEE", minHeight: "100vh" }}>
+    <main style={{ background: "#2c5d63", minHeight: "100vh" }}>
       <Container maxWidth="lg">
-      <Grid
+        <Grid
           container
           alignItems="center"
           sx={{
             height: "calc(100vh - 100px)",
           }}
         >
-          <Grid item sm={12} md={4}>
+          <Grid item sm={12} md={4} sx={{ width: "800px" }}>
             <Stack direction="column" spacing={3}>
               <Typography variant="h5" sx={{ fontWeight: 700, color: "white" }}>
                 Quantum Pharma Technology
               </Typography>
               <Typography variant="subtitle1" sx={{ color: "white" }}>
-                Quantum Pharma Technology provides ecommerce services and leading
-                company in pharma industry
+                Quantum Pharma Technology provides ecommerce services and
+                leading company in pharma industry
               </Typography>
               <Stack direction="row" spacing={3}>
                 <Button
@@ -33,9 +33,9 @@ const Home = () => {
                     fontWeight: 700,
                   }}
                   variant="contained"
-                  onClick={()=>router.push("/register")}
+                  onClick={() => router.push("/register")}
                 >
-                Start With Us
+                  Start With Us
                 </Button>
                 <Link href="">
                   <Button
@@ -73,8 +73,7 @@ const Home = () => {
           alignItems="center"
           height={100}
         >
-          <Link href="">
-          </Link>
+          <Link href=""></Link>
           <Stack direction="row">
             <Button
               variant="outlined"
@@ -84,7 +83,7 @@ const Home = () => {
                 fontWeight: "bold",
                 border: "1px solid white",
               }}
-              onClick={()=>router.push("/login")}
+              onClick={() => router.push("/login")}
               color="primary"
             >
               Log In

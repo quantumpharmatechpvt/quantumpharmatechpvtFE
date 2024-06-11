@@ -22,7 +22,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-  const [data, setData] = useState<any>([]);;
+  const [data, setData] = useState<any>([]);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -38,7 +38,7 @@ const Login = () => {
       setEmailError("");
     }
     setEmailError("");
-    setError('')
+    setError("");
   };
   const handlePwdChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -68,6 +68,7 @@ const Login = () => {
     const user = data.find(
       (user: any) => user.email === email && user.password === password
     );
+    console.log(user,data)
     if (user) {
       localStorage.setItem("email", user.email);
       localStorage.setItem("password", user.password);
@@ -77,10 +78,10 @@ const Login = () => {
         alert("Session expired. Please login again.");
         router.push("/login");
       }, 30 * 60 * 1000);
-      if (user?.userType === "client") {
-        router.push("/home");
-      } else {
+      if (user?.email === "quantumpharmatechpvt@gmail.com") {
         router.push("/settings");
+      } else {
+        router.push("/home");
       }
     } else {
       setError("Invalid email or password.");
@@ -117,7 +118,7 @@ const Login = () => {
               onChange={handleEmailChange}
               error={Boolean(emailError)}
               helperText={emailError}
-              type='email'
+              type="email"
             />
             <TextField
               margin="normal"
@@ -127,7 +128,7 @@ const Login = () => {
               name="password"
               value={password}
               onChange={handlePwdChange}
-              type='password'
+              type="password"
             />
             <Button
               type="submit"
